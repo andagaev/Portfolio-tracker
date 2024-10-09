@@ -5,12 +5,12 @@ import telebot
 import yfinance as yf
 
 API_KEY = os.getenv("API_KEY")
+TG_CHAT_ID_2 = os.getenv("TG_CHAT_ID_2")
 
 bot = telebot.TeleBot(API_KEY)
 
 
-@bot.message_handler(commands=["stocks"])
-def get_stocks(message):
+def get_stocks(event, context):
     today = datetime.datetime.now().strftime("%B %d, %A")
     response = ""
     stocks = ["VOO", "F", "AAPL"]
@@ -42,7 +42,5 @@ def get_stocks(message):
         for row in stock_data:
             response += f"{row[0] : <10}{row[1] : ^10}{row[2] : >10}\n"
         response += "```"
-    bot.send_message(message.chat.id, response, parse_mode="Markdown")
 
-
-bot.polling()
+    bot.send_message(chat_id=TG_CHAT_ID_2, text=response, parse_mode="Markdown")
