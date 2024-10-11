@@ -11,9 +11,27 @@ bot = telebot.TeleBot(API_KEY)
 
 
 def get_stocks(event, context):
-    today = datetime.datetime.now().strftime("%B %d, %A")
+    today = datetime.datetime.now()
     response = ""
-    stocks = ["VOO", "F", "AAPL"]
+    stocks = [
+        "VOO",
+        "SPY",
+        "VXUS",
+        "DIV",
+        "JEPQ",
+        "NVDA",
+        "AAPL",
+        "ABBV",
+        "MSFT",
+        "GOOG",
+        "NFLX",
+        "GNL",
+        "VNQ",
+        "DAL",
+        "MCD",
+        "SBUX",
+        "CVX",
+    ]
     stock_data = []
     columns = ["Stock", "Price", "%Change"]
 
@@ -35,12 +53,14 @@ def get_stocks(event, context):
 
         stock_data.append(stock_info)
 
-        response = f"{today}\n"
-        response += "```\n"
-        response += f"{columns[0] : <10}{columns[1] : ^10}{columns[2] : >10}\n"
-        response += "-" * 30 + "\n"
-        for row in stock_data:
-            response += f"{row[0] : <10}{row[1] : ^10}{row[2] : >10}\n"
-        response += "```"
+    response = f"{today.strftime("%B %d, %A")}\n"
+    response += "```\n"
+    response += "\n"
+    response += f"{columns[0] : <10}{columns[1] : ^10}{columns[2] : >10}\n"
+    response += "-" * 30 + "\n"
+    for row in stock_data:
+        response += f"{row[0] : <10}{row[1] : ^10}{row[2] : >10}\n"
+    response += "```"
 
-    bot.send_message(chat_id=TG_CHAT_ID_2, text=response, parse_mode="Markdown")
+    if today.weekday() < 5:
+        bot.send_message(chat_id=TG_CHAT_ID_2, text=response, parse_mode="Markdown")

@@ -8,15 +8,9 @@ plugins:
 
 custom:
   pythonRequirements:
-    zip: true
+    dockerizePip: true
     usePoetry: true
     requirePoetryLockFile: true
-    pipCmdExtraArgs:
-        - "--platform manylinux2014_aarch64"
-        - "--implementation cp"
-        - "--python-version 3.12"
-        - "--only-binary=:all:"
-        - "--upgrade"
 
 provider:
   name: aws
@@ -25,14 +19,17 @@ provider:
   architecture: arm64
   logRetentionInDays: 1
   versionFunctions: false
+  environment:
+    API_KEY: ${ssm:TELEGRAM_BOT_API_KEY}
+    TG_CHAT_ID_2: ${ssm:TELEGRAM_BOT_CHAT_ID}
 
 functions:
   rateHandler:
     handler: src.handler.get_stocks
     events:
-      - schedule: rate(1 minute)
+      - schedule: rate(1 day)
 
 package:
   exclude:
     - node_modules/**
-    - env/**
+    - .venv/**
