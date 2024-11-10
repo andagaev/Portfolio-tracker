@@ -31,6 +31,8 @@ def get_stocks(event, context):
         "MCD",
         "SBUX",
         "CVX",
+        "TSLA",
+        "RIVN",
     ]
     stock_data = []
     columns = ["Stock", "Price", "%Change"]
