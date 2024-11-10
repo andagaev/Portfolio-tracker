@@ -62,5 +62,4 @@ def get_stocks(event, context):
         response += f"{row[0] : <10}{row[1] : ^10}{row[2] : >10}\n"
     response += "```"
 
-    if today.weekday() < 5:
-        bot.send_message(chat_id=TG_CHAT_ID_2, text=response, parse_mode="Markdown")
+    bot.send_message(chat_id=TG_CHAT_ID_2, text=response, parse_mode="Markdown")

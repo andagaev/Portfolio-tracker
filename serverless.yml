@@ -27,7 +27,8 @@ functions:
   rateHandler:
     handler: src.handler.get_stocks
     events:
-      - schedule: rate(1 day)
+      - schedule: cron(0 21 ? 11-02 MON-FRI *)
+      - schedule: cron(0 20 ? 03-10 MON-FRI *)
 
 package:
   exclude:
