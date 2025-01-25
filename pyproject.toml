@@ -10,6 +10,7 @@ python = "^3.12"
 yfinance = "^0.2.44"
 pytelegrambotapi = "^4.23.0"
 isort = "^5.13.2"
+pytest = "^8.3.4"
 
 
 [build-system]

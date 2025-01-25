@@ -4,6 +4,12 @@ import os
 import telebot
 import yfinance as yf
 
+""" Stock Notifier Bot
+
+This script retrieves daily stock data for predefined stocks from Yahoo finance and sends fromatted summary to Telegram chat.
+The stock data is fetched using the `yfinance` library.
+"""
+
 API_KEY = os.getenv("API_KEY")
 TG_CHAT_ID_2 = os.getenv("TG_CHAT_ID_2")
 
